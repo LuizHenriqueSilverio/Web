@@ -1,0 +1,107 @@
+*{
+	font-family: 'Times New Roman';
+	font-size: 20px;
+	margin-top: 20px;
+}
+
+body{
+	background: url("../img/backimage.jpg") no-repeat center fixed;
+	-webkit-background-size: cover;
+	-moz-background-size: cover;
+	-o-background-size: cover;
+	background-size: cover;
+}
+
+a{
+    color: white;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+#corpo{ 
+ 	margin: 0 auto;
+	background-color: #0000CC;
+	width:750px;
+	height: auto;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 250px;
+	text-align: center;
+}
+
+#corpohome{ 
+ 	margin: 0 auto;
+	width:750px;
+	height: auto;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	margin-top: 175px;
+	text-align: center;
+}
+
+#corpologin{
+	padding-top: 25px;
+    margin: 0;
+    width: auto;
+    height: auto;
+    text-align: center;
+	background-color: #FF0000;
+}
+
+#hh{
+	background-color: #0000CC;
+}
+
+#hca{
+	background-color: #0000CC;
+}
+
+#hco{
+	background-color: #0000CC;
+}
+
+#hge{
+	background-color: #0000CC;
+}
+
+#hpdf{
+	background-color: #0000CC;
+}
+
+#hlog{
+	background-color: #0000CC;
+}
+
+#corpo1{
+    	margin: 0;
+    	width: auto;
+    	height: auto;
+    	margin-top: 20px;
+    	text-align: center;
+	background-color: #0000CC;
+}
+
+#corpoform{
+	background-color: #0000CC;
+	color: white;
+}
+
+#title{
+	color: white;
+}
+
+#botao{
+	text-align: center;
+}
+
+#loginadmin{
+	background-color: #EFEFEF;
+}
+
+a:hover{
+   text-decoration: none;
+   background: #FF0000;
+   color: white;
+   border-bottom: solid 4px #011AFF;
+   text-shadow: 1px 0px 1px #fff;
+}
