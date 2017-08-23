@@ -4,8 +4,8 @@
         $config["smtp_host"]="ssl://smtp.googlemail.com";
         $config["smtp_port"]="465 ";
         $config["smtp_timeout "]="30";
-        $config["smtp_user"]="";
-        $config["smtp_pass"]="";
+        $config["smtp_user"]="webtestes.432@gmail.com";
+        $config["smtp_pass"]="12345abc";
         $config["charset"]="utf-8";
         $config["newline"]="\r\n";
         $config["mailtype"]="html";
