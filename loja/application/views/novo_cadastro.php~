@@ -9,39 +9,39 @@
 			echo form_open(base_url('cadastro/adicionar'),array('id'=>'
 				form_cadastro')).
 				"<div class='span4'>".
-				form_input(array('id'=>'nome','name'=>'nome','Placeholder'=>'Nome',
+				form_input(array('id'=>'nome','nome'=>'nome','Placeholder'=>'Nome',
 					'value'=>set_value('nome'))).
-				form_input(array('id'=>'sobrenome','name'=>'sobrenome','Placeholder'=>'Sobrenome',
+				form_input(array('id'=>'sobrenome','nome'=>'sobrenome','Placeholder'=>'Sobrenome',
 					'value'=>set_value('sobrenome'))).
-				form_input(array('id'=>'rg','name'=>'rg','Placeholder'=>'Rg',
+				form_input(array('id'=>'rg','nome'=>'rg','Placeholder'=>'Rg',
 					'value'=>set_value('rg'))).
-				form_input(array('id'=>'cpf','name'=>'cpf','Placeholder'=>'Cpf',
+				form_input(array('id'=>'cpf','nome'=>'cpf','Placeholder'=>'Cpf',
 					'value'=>set_value('cpf'))).
-				form_input(array('id'=>'data_nascimento','name'=>'data_nascimento','Placeholder'=>'Data de Nascimento',
+				form_input(array('id'=>'data_nascimento','nome'=>'data_nascimento','Placeholder'=>'Data de Nascimento',
 					'value'=>set_value('data_nascimento'))).
-				form_input(array('id'=>'sexo','name'=>'sexo','Placeholder'=>'Sexo(M/F)',
+				form_input(array('id'=>'sexo','nome'=>'sexo','Placeholder'=>'Sexo(M/F)',
 					'value'=>set_value('sexo'))).
 					"</div><div class='span4'>".
-				form_input(array('id'=>'cep','name'=>'cep','Placeholder'=>'CEP',
+				form_input(array('id'=>'cep','nome'=>'cep','Placeholder'=>'CEP',
 					'value'=>set_value('cep'))).
-				form_input(array('id'=>'rua','name'=>'rua','Placeholder'=>'Rua',
+				form_input(array('id'=>'rua','nome'=>'rua','Placeholder'=>'Rua',
 					'value'=>set_value('rua'))).
-				form_input(array('id'=>'bairro','name'=>'bairro','Placeholder'=>'Bairro',
+				form_input(array('id'=>'bairro','nome'=>'bairro','Placeholder'=>'Bairro',
 					'value'=>set_value('bairro'))).
-				form_input(array('id'=>'cidade','name'=>'cidade','Placeholder'=>'Cidade',
+				form_input(array('id'=>'cidade','nome'=>'cidade','Placeholder'=>'Cidade',
 					'value'=>set_value('cidade'))).
-				form_input(array('id'=>'estado','name'=>'estado','Placeholder'=>'Estado',
+				form_input(array('id'=>'estado','nome'=>'estado','Placeholder'=>'Estado',
 					'value'=>set_value('estado'))).
-				form_input(array('id'=>'numero','name'=>'numero','Placeholder'=>'Número',
+				form_input(array('id'=>'numero','nome'=>'numero','Placeholder'=>'Número',
 					'value'=>set_value('numero'))).
 					"</div><div class='span4'>".
-				form_input(array('id'=>'telefone','name'=>'telefone','Placeholder'=>'Telefone',
+				form_input(array('id'=>'telefone','nome'=>'telefone','Placeholder'=>'Telefone',
 					'value'=>set_value('telefone'))).
-				form_input(array('id'=>'celular','name'=>'celular','Placeholder'=>'Celular',
+				form_input(array('id'=>'celular','nome'=>'celular','Placeholder'=>'Celular',
 					'value'=>set_value('celular'))).
-				form_input(array('id'=>'email','name'=>'email','Placeholder'=>'E-mail',
+				form_input(array('id'=>'email','nome'=>'email','Placeholder'=>'E-mail',
 					'value'=>set_value('email'))).
-				form_input(array('id'=>'senha','name'=>'senha','Placeholder'=>'Senha',
+				form_input(array('id'=>'senha','nome'=>'senha','Placeholder'=>'Senha',
 					'value'=>set_value('senha'))).
 				form_submit('btn_cadastrar','Cadastrar')."</div>".
 				form_close();
