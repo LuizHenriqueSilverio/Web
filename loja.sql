@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 23, 2017 at 11:57 AM
+-- Generation Time: Aug 30, 2017 at 10:38 AM
 -- Server version: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.21-1~ubuntu16.04.1+deb.sury.org+1
 
@@ -50,6 +50,8 @@ CREATE TABLE `ci_sessions` (
 --
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('ekmukunu1f6f43ov2jghh4ui634i4ska', '127.0.0.1', 1503571797, 0x5f5f63695f6c6173745f726567656e65726174657c693a313530333537313739373b),
+('nsesl7teur5fto91gnf2hgfvvsbk856g', '127.0.0.1', 1503571799, 0x5f5f63695f6c6173745f726567656e65726174657c693a313530333537313739373b),
 ('sqlk449mjmqcrcenbnackh74eorr0lkp', '127.0.0.1', 1503500034, 0x5f5f63695f6c6173745f726567656e65726174657c693a313530333439393737323b);
 
 -- --------------------------------------------------------
@@ -99,6 +101,13 @@ CREATE TABLE `produtos` (
   `data_adicionado` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `ativo` tinyint(1) NOT NULL DEFAULT '1'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `produtos`
+--
+
+INSERT INTO `produtos` (`id`, `codigo`, `titulo`, `descricao`, `preco`, `largura_caixa_mm`, `altura_caixa_mm`, `comprimento_caixa_mm`, `peso_gramas`, `data_adicionado`, `ativo`) VALUES
+(1, '1', 'Merda', 'Um toletão de bosta', '10.00', 1, 1, 1, 1000, '2017-08-24 10:39:47', 1);
 
 -- --------------------------------------------------------
 
@@ -168,7 +177,7 @@ ALTER TABLE `clientes`
 -- AUTO_INCREMENT for table `produtos`
 --
 ALTER TABLE `produtos`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
 -- Constraints for dumped tables
 --
