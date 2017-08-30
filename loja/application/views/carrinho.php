@@ -25,3 +25,33 @@
 		"<div class='span2 texto-direita'>" . reais($this->cart->total()) . "</div>" .
 		"</div>" .
 		form_close();
+		
+	public function frete_transportadora($estado_destino){
+		$peso = 0;
+		foreach($this->cart->contents() as $item){
+			$peso+=($item['peso'] * $item['qty']);		
+		}
+		$peso = ceil($peso/1000);
+		$custo_frete = $this->db->query("SELECT * FROM tb_transporte_preco
+									WHERE ucase(uf) = ucase('".$estado_destino."')
+									AND peso_ate >= ". $peso ." ORDER BY peso_ate DESC
+									LIMIT 1")->result();
+		if(count($custo_frete) < 1){
+			$custo_frete = $this->db->query("SELECT * FROM tb_transporte_preco
+										WHERE ucase(uf) = ucase('".$estado_destino."')
+										ORDER BY peso_ate DESC LIMIT 1")->result();
+			print_r($custo_frete);
+			if(count($custo_frete) < 1){
+				$custo_frete = $this->db->query("SELECT * FROM tb_transporte_preco
+											ORDER BY peso_ate DESC LIMIT 1")->result();			
+			}			
+		}
+		$adicional = 0;
+		if($peso > $custo_frete[0]->peso_ate) {
+			$adicional = ($peso - $custo_frete[0]->peso_ate) *
+								$custo_frete[0] -> adicional_kg;	
+		}
+		$preco_frete = ($custo_frete[0]->preco + $adicional);
+		return $preco_frete;
+	}	
+	}
