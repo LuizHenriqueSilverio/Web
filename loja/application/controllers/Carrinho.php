@@ -8,14 +8,22 @@
 		}
 		public function index(){
 			$data_header['categorias'] = $this->categorias;
+			if(null != $this->session->userdata('logado')){
+				$sessao = $this->session->userdata();
+				$estado = $sessao['cliente']->estado;
+				$data['frete'] = $this->frete_transportadora($estado);			
+			}
+			else{
+				$data['frete'] = null;			
+			}
 			$this->load->view('html-header');
 			$this->load->view('header', $data_header);
-			$this->load->view('carrinho');
+			$this->load->view('carrinho', $data);
 			$this->load->view('footer');
-			$this->load->view('html-header');		
+			$this->load->view('html-footer');		
 		}
 		public function adicionar(){
-			$data = array('id' => this->input->post('id'),
+			$data = array('id' => $this->input->post('id'),
 				'qty'=>$this->input->post('quantidade'),
 				'price'=>$this->input->post('preco'),
 				'name'=>$this->input->post('nome'),
@@ -25,7 +33,7 @@
 				'peso'=>$this->input->post('peso'),
 				'options'=>null,
 				'url'=>$this->input->post('url'),
-				'foto'=>$this->input->('foto'));
+				'foto'=>$this->input->post('foto'));
 				$this->cart->insert($data);
 				redirect(base_url("carrinho"));		
 		}
@@ -42,5 +50,50 @@
 			$data = array('rowid'=>$rowid, 'qty'=>0);
 			$this->cart->upadte($data);
 			redirect(base_url('carrinho'));		
-		}	
+		}
+		public function frete_transportadora(){
+			$peso = 0;
+			foreach($this->cart->contents() as $item){
+				$peso += ($item['peso'] * $item['qty']);			
+			}
+			$peso = ceil($peso/1000);
+			$custo_frete = $this->db->query("SELECT * FROM tb_transporte_preco
+										WHERE ucase(uf) = ucase('".$estado_destino."')
+										AND peso_ate >= " .$peso. " ORDER BY peso_ate DESC LIMIT 1")->result();
+			if(count($custo_frete) < 1){
+				$custo_frete = $this->db->query("SELECT * FROM tb_transporte_preco
+											WHERE ucase(uf) = ucase('".$estado_destino."')
+											ORBER BY peso_ate DESC LIMIT 1")->result();
+				print_r($custo_frete);
+				if(count($custo_frete) < 1){
+					$custo_frete = $this->db->query("SELECT * FROM tb_transporte_preco
+												ORDER BY peso_ate DESC LIMIT 1")->result();				
+				}		
+			}
+			$adicional = 0;
+			if($peso > $custo_frete[0]->peso_ate){
+				$adicional = ($peso - $custo_frete[0]->peso_ate) *
+									$custo_frete[0]->adicional_kg;			
+			}
+			$preco_frete = ($custo_frete[0]->preco + $adicional);
+			return $preco_frete;		
+		}
+		public function pagar(){
+			require './locaweb-gateway-php/LocawebGateway.php';
+			$array_pedido = array('numero'=>10, 'total'=>105.00, 'moeda'=>'real',
+				'descricao'=>'Pedido:10');
+			$array_pagamento = array('meio_pagamento'=>'cielo', 'parcelas'=>1,
+				'tipo_operacao'=>'credito_a_vista', 'bandeira'=>'visa',
+				'nome_titular_cartao'=>'teste','cartao_numero'=>'4551870000000183',
+				'cartao_cvv'=>'973','cartao_validade'=>'082017');
+			$array_comprador = array('nome'=>'John da Silva', 'documento' =>'000.000.000-00',
+				'endereco'=>'Rua X', 'numero'=>'98', 'cep'=>'1234-999',
+				'bairro'=>'Centro', 'cidade'=>'Varginha', 'estado'=>'MG');
+			$array_transacao = array('url_retorno'=>base_url('carrinho/retorno-pagamento'),
+				'capturar'=>'true', 'pedido'=>$array_pedido,
+				'pagamento'=>$array_pagamento, 'comprador'=>$array_comprador);
+			$transacao = LocawebGatway::criar($array_transacao)->sendRequest();
+			echo "<pre>";
+			print_r($transacao);	
+		}
 	}

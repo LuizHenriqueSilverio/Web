@@ -3,8 +3,8 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Aug 30, 2017 at 10:38 AM
--- Server version: 5.7.18-0ubuntu0.16.04.1
+-- Generation Time: 31-Ago-2017 às 07:31
+-- Versão do servidor: 5.7.18-0ubuntu0.16.04.1
 -- PHP Version: 7.0.21-1~ubuntu16.04.1+deb.sury.org+1
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
@@ -23,7 +23,7 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
--- Table structure for table `categorias`
+-- Estrutura da tabela `categorias`
 --
 
 CREATE TABLE `categorias` (
@@ -35,7 +35,7 @@ CREATE TABLE `categorias` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `ci_sessions`
+-- Estrutura da tabela `ci_sessions`
 --
 
 CREATE TABLE `ci_sessions` (
@@ -46,18 +46,20 @@ CREATE TABLE `ci_sessions` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
--- Dumping data for table `ci_sessions`
+-- Extraindo dados da tabela `ci_sessions`
 --
 
 INSERT INTO `ci_sessions` (`id`, `ip_address`, `timestamp`, `data`) VALUES
+('4ibjft9k2gc038bq14dbmrhothq4qiav', '::1', 1504175162, 0x5f5f63695f6c6173745f726567656e65726174657c693a313530343137353031393b),
 ('ekmukunu1f6f43ov2jghh4ui634i4ska', '127.0.0.1', 1503571797, 0x5f5f63695f6c6173745f726567656e65726174657c693a313530333537313739373b),
+('llhg4evr25a3dj977nqf1cpt2cajb6in', '::1', 1504175019, 0x5f5f63695f6c6173745f726567656e65726174657c693a313530343137353031393b),
 ('nsesl7teur5fto91gnf2hgfvvsbk856g', '127.0.0.1', 1503571799, 0x5f5f63695f6c6173745f726567656e65726174657c693a313530333537313739373b),
 ('sqlk449mjmqcrcenbnackh74eorr0lkp', '127.0.0.1', 1503500034, 0x5f5f63695f6c6173745f726567656e65726174657c693a313530333439393737323b);
 
 -- --------------------------------------------------------
 
 --
--- Table structure for table `clientes`
+-- Estrutura da tabela `clientes`
 --
 
 CREATE TABLE `clientes` (
@@ -85,7 +87,7 @@ CREATE TABLE `clientes` (
 -- --------------------------------------------------------
 
 --
--- Table structure for table `produtos`
+-- Estrutura da tabela `produtos`
 --
 
 CREATE TABLE `produtos` (
@@ -103,7 +105,7 @@ CREATE TABLE `produtos` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
--- Dumping data for table `produtos`
+-- Extraindo dados da tabela `produtos`
 --
 
 INSERT INTO `produtos` (`id`, `codigo`, `titulo`, `descricao`, `preco`, `largura_caixa_mm`, `altura_caixa_mm`, `comprimento_caixa_mm`, `peso_gramas`, `data_adicionado`, `ativo`) VALUES
@@ -112,13 +114,40 @@ INSERT INTO `produtos` (`id`, `codigo`, `titulo`, `descricao`, `preco`, `largura
 -- --------------------------------------------------------
 
 --
--- Table structure for table `produtos_categoria`
+-- Estrutura da tabela `produtos_categoria`
 --
 
 CREATE TABLE `produtos_categoria` (
   `produto` int(10) UNSIGNED NOT NULL,
   `categoria` int(10) UNSIGNED NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Estrutura da tabela `tb_transporte_preco`
+--
+
+CREATE TABLE `tb_transporte_preco` (
+  `id` int(10) UNSIGNED NOT NULL,
+  `peso_de` decimal(6,2) NOT NULL,
+  `peso_ate` decimal(6,2) NOT NULL,
+  `preco` decimal(10,2) NOT NULL,
+  `adicional_kg` decimal(10,2) NOT NULL,
+  `uf` varchar(45) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Extraindo dados da tabela `tb_transporte_preco`
+--
+
+INSERT INTO `tb_transporte_preco` (`id`, `peso_de`, `peso_ate`, `preco`, `adicional_kg`, `uf`) VALUES
+(1, '0.00', '10.00', '27.37', '0.71', 'SC'),
+(2, '0.00', '10.00', '27.37', '0.71', 'SP'),
+(3, '0.00', '10.00', '27.37', '0.71', 'RS'),
+(4, '0.00', '10.00', '36.76', '0.71', 'MG'),
+(5, '0.00', '10.00', '40.80', '0.71', 'RJ'),
+(6, '0.00', '10.00', '44.27', '0.71', 'DF');
 
 --
 -- Indexes for dumped tables
@@ -160,6 +189,12 @@ ALTER TABLE `produtos_categoria`
   ADD KEY `FK_produtos_categorias_categoria` (`categoria`);
 
 --
+-- Indexes for table `tb_transporte_preco`
+--
+ALTER TABLE `tb_transporte_preco`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -179,11 +214,16 @@ ALTER TABLE `clientes`
 ALTER TABLE `produtos`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 --
+-- AUTO_INCREMENT for table `tb_transporte_preco`
+--
+ALTER TABLE `tb_transporte_preco`
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+--
 -- Constraints for dumped tables
 --
 
 --
--- Constraints for table `produtos_categoria`
+-- Limitadores para a tabela `produtos_categoria`
 --
 ALTER TABLE `produtos_categoria`
   ADD CONSTRAINT `FK_produtos_categorias_categoria` FOREIGN KEY (`categoria`) REFERENCES `categorias` (`id`) ON UPDATE CASCADE,
